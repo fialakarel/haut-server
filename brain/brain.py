@@ -45,7 +45,12 @@ class Brain(object):
                 if data["value"] > 25:
                     print("IFTTT_h: too high temperature")
                     self._send("dev-cool")
+            elif data["key"] == "pir-18":
+                if data["value"] == 1:
+                    self._send("gpio-17-on")
                 else:
+                    self._send("gpio-17-off")
+            else:
                     pass
 
         elif host == "dev2.haut.local":
