@@ -25,5 +25,5 @@ class Brain(object):
         # create requests for clients
         net = Network()
         while True:
-            net.send(cmd["led-on"], "127.0.0.1", 5555)
+            net.send(cmd["temp"], "127.0.0.1", 5555)
             time.sleep(5)
