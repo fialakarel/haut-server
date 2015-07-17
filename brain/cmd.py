@@ -22,6 +22,7 @@ class Cmd(object):
         
         # real
         self.setcmd("dev.haut.local", "temperature", "temperature.py", "28-000005e6d5be")
+        self.setcmd("dev.haut.local", "pir-18", "pir.py", "18")
     
     def getcmd(self, key):
         return self.cmd[key]

@@ -37,7 +37,11 @@ class Brain(object):
     
     def ifttt(self, data, host):
         if host == "dev.haut.local":
-            if data["key"] == "temp1":
+            if data["key"] == "status":
+                if data["value"] == "login":
+                    self._send("pir-18")
+                
+            elif data["key"] == "temp1":
                 if data["value"] > 25:
                     print("IFTTT_h: too high temperature")
                     self._send("dev-cool")
@@ -61,6 +65,7 @@ class Brain(object):
 
     def run(self):
         # create requests for clients
+        self._send("pir-18")
         while True:
             self._send("temperature")
             time.sleep(5)

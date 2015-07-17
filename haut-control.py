@@ -8,7 +8,7 @@
 import sys
 from config import *
 from network import Network
-from brain.commands import *
+from brain.cmd import *
 
 udp = Network()
 
