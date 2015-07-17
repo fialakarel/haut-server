@@ -10,6 +10,7 @@ import threading
 from config import *
 from network import Network
 from brain.brain import Brain
+import sys
 
 # ======================
 
@@ -27,20 +28,27 @@ def reqrecv():
     try:
         while True:
             d = udp.recv()
-            (threading.Thread(target=brain.process, args=(d,))).start()
+            ip = udp.recv_from()
+            (threading.Thread(target=brain.process, args=(d,ip))).start()
 
     except KeyboardInterrupt:
-        pass
+        sys.exit(0)
     return
 
 
 # receive requests from clients
-(threading.Thread(target=reqrecv)).start()
+try:
+    (threading.Thread(target=reqrecv)).start()
+except KeyboardInterrupt:
+    sys.exit(0)
 
 # ======================
 
 # create requests for clients
-(threading.Thread(target=brain.run)).start()
+try:
+    (threading.Thread(target=brain.run)).start()
+except KeyboardInterrupt:
+    sys.exit(0)
 
 # ======================
 

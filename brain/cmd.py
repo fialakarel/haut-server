@@ -15,7 +15,9 @@ class Cmd(object):
     
     def createcmds(self):
         self.setcmd("dev.haut.local", "temp", "temp.py", "")
-        self.setcmd("dev.haut.local", "temp2", "temperature.py", "5 5")        
+        self.setcmd("dev.haut.local", "temp2", "temperature.py", "5 5")
+        self.setcmd("dev.haut.local", "dev-cool", "cool.py", "")
+        self.setcmd("dev.haut.local", "dev-cool2", "cool2.py", "aaa")
     
     def getcmd(self, key):
         return self.cmd[key]
