@@ -7,13 +7,18 @@
 
 import os,sys,time
 from network import Network
-from .commands import *
+from .cmd import Cmd
+from .mem import Mem
+
+import socket
 
 
 class Brain(object):
     
     def __init__(self):
-        # initialization
+        self.mem = Mem()
+        self.cmd = Cmd()
+        self.net = Network()
         pass
     
     def process(self, d):
@@ -23,7 +28,14 @@ class Brain(object):
     
     def run(self):
         # create requests for clients
-        net = Network()
         while True:
-            net.send(cmd["temp"], "127.0.0.1", 5555)
+            self._send("temp")
             time.sleep(5)
+
+
+
+
+    def _send(self, cmd):
+        tmp = self.cmd.getcmd(cmd)
+        self.net.send(tmp, tmp["dev"], 5555)
+        

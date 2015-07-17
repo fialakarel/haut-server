@@ -14,6 +14,7 @@ from brain.brain import Brain
 # ======================
 
 # create brain
+global brain
 brain = Brain()
 
 # start listening
