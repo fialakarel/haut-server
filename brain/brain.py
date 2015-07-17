@@ -62,7 +62,7 @@ class Brain(object):
     def run(self):
         # create requests for clients
         while True:
-            self._send("temp")
+            self._send("temperature")
             time.sleep(5)
             self.ifttt_period()
 
