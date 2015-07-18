@@ -56,6 +56,14 @@ class Brain(object):
         elif host == "dev2.haut.local":
             pass
         
+        elif host == "webserver.haut.local":
+            if data["key"] == "get":
+                d = self.mem.getmem(data["value"])
+                self.net.send(d, "webserver.haut.local", 5557)
+            
+            if data["key"] == "set":
+                self._send(data["value"])
+        
         else:
             pass
     
@@ -73,6 +81,7 @@ class Brain(object):
         self._send("pir-18")
         while True:
             self._send("temperature")
+            self._send("dev-status")
             time.sleep(5)
             self.ifttt_period()
 
