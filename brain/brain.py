@@ -20,6 +20,9 @@ class Brain(object):
         self.mem = Mem()
         self.cmd = Cmd()
         self.net = Network()
+        
+        self.ifttt = open("./brain/logic/IFTTT.py").read()
+        
         pass
     
     def process(self, data, ip):
@@ -27,65 +30,24 @@ class Brain(object):
         print(str(datetime.now()) + " " + str(self.net.gethost(ip[0])) + ":" + str(ip[1]) + " " + str(data))
         self.mem.setmem(str(self.net.gethost(ip[0])) + "_" + str(data["key"]), str(data["value"]))
         
-        # debug
-        #self.mem.printall()
+        host=str(self.net.gethost(ip[0]))        
         
         # if this than this
-        self.ifttt(data, str(self.net.gethost(ip[0])))
-    
-    
-    
-    def ifttt(self, data, host):
-        if host == "dev.haut.local":
-            if data["key"] == "status":
-                if data["value"] == "login":
-                    self._send("pir-18")
-                
-            elif data["key"] == "temp1":
-                if data["value"] > 25:
-                    print("IFTTT_h: too high temperature")
-                    self._send("dev-cool")
-            elif data["key"] == "pir-18":
-                if data["value"] == 1:
-                    self._send("gpio-17-on")
-                else:
-                    self._send("gpio-17-off")
-            else:
-                    pass
-
-        elif host == "dev2.haut.local":
-            pass
-        
-        elif host == "webserver.haut.local":
-            if data["key"] == "get":
-                d = self.mem.getmem(data["value"])
-                self.net.send(d, "webserver.haut.local", 5557)
-            
-            if data["key"] == "set":
-                self._send(data["value"])
-        
-        else:
-            pass
-    
-    
-    
-    def ifttt_period(self):
-        if int(self.mem.getmem("dev.haut.local_temp1")) > 28:
-                print("IFTTT_p: blabla")
-                self._send("dev-cool2")
-
+        exec(self.ifttt)
 
 
     def run(self):
         # create requests for clients
-        self._send("pir-18")
+        
+        # run these at startup
+        exec(open("./brain/logic/ServerStartup.py").read())
+        
+        # run these forever code -- optimization
+        period=open("./brain/logic/Periodical.py").read()
+        
         while True:
-            self._send("temperature")
-            self._send("dev-status")
-            time.sleep(5)
-            self.ifttt_period()
-
-
+            # run these forever
+            exec(period)
 
 
     def _send(self, cmd):

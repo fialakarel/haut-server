@@ -13,11 +13,11 @@ class Mem(object):
         self.mem = dict()
 
     def setmem(self, key, value):
-        self.mem[key] = value
+        self.mem[key.replace('.','-')] = value
         
     def getmem(self, key):
         try:
-            return self.mem[key]
+            return self.mem[key.replace('.','-')]
         except KeyError:
             return False
     

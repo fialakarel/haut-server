@@ -42,9 +42,7 @@ class Network(object):
     def createdns(self):
         # define IP -- DNS too slow and fails often
         self.host = dict()
-        self.host["main.haut.local"] = "192.168.1.74"
-        self.host["dev.haut.local"] = "192.168.1.90"
-        self.host["webserver.haut.local"] = "127.0.0.1"
+        exec(open("./brain/logic/dns.py").read())
 
     def getip(self, host):
         return self.host[host]
