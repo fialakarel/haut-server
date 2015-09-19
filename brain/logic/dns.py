@@ -10,3 +10,5 @@
 self.host["main.haut.local"] = "192.168.1.74"
 self.host["dev.haut.local"] = "192.168.1.71"
 self.host["webserver.haut.local"] = "127.0.0.1"
+self.host["bedroom1.haut.local"] = "192.168.1.80"
+

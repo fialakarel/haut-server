@@ -29,3 +29,10 @@ self.setcmd("dev.haut.local", "gpio-17-fadeout", "fade", "17 0.2 0")
 self.setcmd("dev.haut.local", "gpio-17-fadehalf", "fade", "17 0.8 0.2")
 
 self.setcmd("dev.haut.local", "dev-status", "status", "")
+
+
+self.setcmd("bedroom1.haut.local", "bedroom1-status", "status", "")
+self.setcmd("bedroom1.haut.local", "bedroom1-temp1", "temperature", "28-000006dc1ec1")
+self.setcmd("bedroom1.haut.local", "heatbed-on", "gpio", "17 1")
+self.setcmd("bedroom1.haut.local", "heatbed-off", "gpio", "17 0")
+
